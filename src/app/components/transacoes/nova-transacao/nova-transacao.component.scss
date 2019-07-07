@@ -1,0 +1,28 @@
+
+  #transacao {
+    thead .valor {
+      width: 6rem;
+    }
+
+    tfoot tr {
+      background-color: #282b2f;
+    }
+
+  
+    .radio-template:checked::before {
+      background: #ffc107;
+    }
+
+    .radio-template:checked + label {
+      color: #ffc107;
+    }
+
+    .checkbox-template:checked::before {
+      background: #17a2b8;
+    }
+
+    .checkbox-template:checked + label {
+      color: #17a2b8;
+    }
+
+  }

@@ -1,0 +1,49 @@
+<section class="no-padding-top">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div *ngFor="let item of blocosMinerados; let index = index;" class="col-lg-3">
+            <div class="block">
+              <div class="title">
+                <strong class="d-block">
+                  bloco
+                  <strong class="text-primary"># {{ item.altura }}</strong>
+                </strong>
+                <span class="d-block">
+                  <span>minerado em&nbsp;</span>
+                  <span class="text-primary text-bold">{{ item.dataCriacao | date:'dd/MM/yy' }}</span>
+                  <span>&nbsp;as&nbsp;</span>
+                  <span class="text-primary text-bold">{{ item.dataCriacao | date:'HH:mm:ss' }}</span>
+                </span>
+              </div>
+              <div class="block-body">
+        
+                  <div class="form-group">
+                    <label class="form-control-label d-block text-info">transações mineradas</label>
+                    <a href="#" class=" text-warning">{{ calcularTransacoesMineradasBloco( item ) }} transações</a>
+                  </div>
+                  <div class="form-group">       
+                    <label class="form-control-label d-block text-info">nonce</label>
+                    <input type="text" placeholder="informe um número válido" class="form-control text-warning" value="{{ item.nonce }}" />
+                  </div>
+                  <div class="form-group">       
+                    <label class="form-control-label d-block">hash do bloco anterior</label>
+                    <span class="text-secondary text-bold text-uppercase hash-code">{{ item.hashBlocoAnterior }}</span>
+                  </div>
+                  <div class="form-group">       
+                    <label class="form-control-label d-block">hash do bloco</label>
+                    <span class="text-primary text-bold text-uppercase hash-code">{{ item.hashBloco }}</span>
+                  </div>
+
+                  <div class="form-group text-right">       
+                    <input [class]="minerando ? 'btn btn-secondary' : 'btn btn-warning'" control type="submit" value="minerar" class="btn btn-warning" (click)="minerarBloco(item, item.altura);">
+                  </div>
+          
+              </div>
+            </div>
+          </div>
+  
+      </div>
+    </div>
+  </section>
+  

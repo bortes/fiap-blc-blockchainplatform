@@ -1,0 +1,109 @@
+<section class="no-padding-top">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="col-lg-6">
+          <div class="block">
+            <div class="title"><strong>transações pendentes - não mineradas</strong></div>
+            <div class="text-right"><input type="submit" value="nova transação" class="btn btn-primary" (click)="onNovaTransacao()"></div>
+            <div class="table-responsive"> 
+              <table id="pendentes" class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th>hash</th>
+                    <th>de</th>
+                    <th>para</th>
+                    <th>valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of transacoesPendentes;">
+                    <td><a title="{{ item.hash }}">{{ item.hash.substr(0, 4) }}</a></td>
+                    <td>
+                      <div *ngFor="let subitem of item.entradas;">
+                        <span>{{ rotulos[subitem.endereco] || subitem.endereco }}</span>
+                      </div>
+                      <span *ngIf="item.premioMineracao">PRÊMIO MINERAÇÃO </span>
+                    </td>
+                    <td>
+                      <div *ngFor="let subitem of item.saidas;">
+                        <span>{{ rotulos[subitem.endereco] || subitem.endereco }}</span>
+                        <sup *ngIf="subitem.troco"> TROCO</sup>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngFor="let subitem of item.saidas;">
+                        <span class="{{ subitem.troco ? '' : 'text-info' }}">{{ subitem.valor }}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div class="text-right"><input type="submit" value="nova transação" class="btn btn-primary" (click)="onNovaTransacao()"></div>
+          </div>
+        </div>
+  
+        <div class="col-lg-6">
+            <div class="block">
+              <div class="title"><strong>transações processadas - mineradas</strong></div>
+              <div class="table-responsive"> 
+                <table id="processadas" class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>hash</th>
+                      <th>bloco</th>
+                      <th>de</th>
+                      <th>para</th>
+                      <th>valor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of transacoesProcessadas;">
+                      <td><a title="{{ item.hash }}">{{ item.hash.substr(0, 4) }}</a></td>
+                      <td>{{ item.bloco }}</td>
+                      <td>
+                        <div *ngFor="let subitem of item.entradas;">
+                          <span class="text-warning">{{ rotulos[subitem.endereco] || subitem.endereco }}</span>
+                        </div>
+                        <span *ngIf="item.premioMineracao">PRÊMIO MINERAÇÃO </span>
+                      </td>
+                      <td>
+                        <div *ngFor="let subitem of item.saidas;">
+                          <span class="{{ subitem.troco ? '' : 'text-info' }}">{{ rotulos[subitem.endereco] || subitem.endereco }}</span>
+                          <sup *ngIf="subitem.troco"> TROCO</sup>
+                        </div>
+                      </td>
+                      <td>
+                        <div *ngFor="let subitem of item.saidas;">
+                          <span class="{{ subitem.troco ? '' : 'text-info' }}">{{ subitem.valor }}</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th scope="row"></th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+    
+      </div>
+    </div>
+  </section>
+  

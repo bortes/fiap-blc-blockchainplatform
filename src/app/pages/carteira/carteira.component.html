@@ -1,0 +1,45 @@
+<section class="no-padding-top">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-lg-6">
+        <div class="block">
+          <div class="title"><strong>endereços registrados nesta carteira</strong></div>
+          <div class="text-right"><input type="submit" value="novo endereço" class="btn btn-primary" (click)="onNovoEndereco()"></div>
+          <div class="table-responsive"> 
+            <table id="enderecos" class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th class="indice hidden-xs">#</th>
+                  <th class="endereco">endereço</th>
+                  <th>rótulo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of enderecosMinerador; let index = index;">
+                  <th class="hidden-xs" scope="row">{{ index + 1 }}</th>
+                  <td class="text-info">{{ item.endereco }}</td>
+                  <td class="text-warning">{{ item.rotulo }}</td>
+                </tr>
+                <tr *ngFor="let item of enderecosCarteira; let index = index;">
+                  <th class="hidden-xs" scope="row">{{ index + 1 + enderecosMinerador.length }}</th>
+                  <td class="text-info">{{ item.endereco }}</td>
+                  <td>{{ item.rotulo }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="row"></th>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="text-right"><input type="submit" value="novo endereço" class="btn btn-primary" (click)="onNovoEndereco()"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

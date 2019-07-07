@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <strong id="exampleModalLabel" class="modal-title">Cadastrar novo endereço</strong>
+  <button type="button" data-dismiss="modal" aria-label="Close" class="close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="novoEnderecoForm">
+    <div class="form-group">
+      <label>endereço</label>
+      <input control formControlName="endereco" type="text" placeholder="informe um endereço ou clique em 'gerar novo endereço'" class="form-control" maxlength="34">
+    </div>
+    <div class="form-group">       
+      <input type="submit" value="gerar novo endereço" class="btn btn-secondary" (click)="gerarNovoEndereco()">
+    </div>
+    <div class="form-group">       
+      <label>rótulo</label>
+      <input control formControlName="rotulo" type="text" placeholder="informe um rótulo para o novo endereço" class="form-control" maxlength="20">
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" data-dismiss="modal" class="btn btn-secondary" (click)="activeModal.dismiss('close')">fechar</button>
+  <button type="button" class="btn btn-primary" (click)="salvarNovoEndereco()">salvar</button>
+</div>

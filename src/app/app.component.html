@@ -1,0 +1,45 @@
+<header class="header">   
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+      <div class="navbar-header">
+        <!-- Navbar Header--><a href="index.html" class="navbar-brand">
+          <div class="brand hidden-xs text-uppercase"><strong class="text-primary">BLOCK</strong><strong>CHAIN</strong></div>
+          <div class="brand hidden-xl hidden-lg hidden-md hidden-sm text-uppercase"><strong class="text-primary">B</strong><strong>C</strong></div>
+        </a><!-- Sidebar Toggle Btn-->
+      </div>
+      <div class="right-menu list-inline no-margin-bottom main-menu">
+        <!-- main menu -->
+        <div class="list-inline-item">
+          <a routerLinkActive="active" routerLink="/carteira" class="nav-link">carteira <i class="icon-info"></i></a>
+        </div>
+        <div class="list-inline-item">
+          <a routerLinkActive="active" routerLink="/transacoes" class="nav-link">transacoes <i class="icon-layers"></i></a>
+        </div>
+        <div class="list-inline-item">
+          <a routerLinkActive="active" routerLink="/blocos" class="nav-link">blocos <i class="icon-grid"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="d-flex align-items-stretch">
+  <div class="page-content">
+    <!-- Breadcrumb-->
+    <div class="container-fluid">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item active text-bold text-uppercase">{{ rotaAtiva}}</li>
+      </ul>
+    </div>
+  
+    <router-outlet></router-outlet>
+
+    <footer class="footer">
+      <div class="footer__block block no-margin-bottom">
+        <div class="container-fluid text-center">
+          <!-- Please do not remove the backlink to us unless you support us at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            <p class="no-margin-bottom">2019 &copy; Blockchain. Download From <a target="_blank" href="https://templateshub.net">Templates Hub</a>.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>

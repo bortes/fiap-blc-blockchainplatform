@@ -1,0 +1,79 @@
+<div class="modal-header">
+  <strong id="exampleModalLabel" class="modal-title">Cadastrar nova transação</strong>
+  <button type="button" data-dismiss="modal" aria-label="Close" class="close" (click)="activeModal.dismiss('close')">
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="novaTransacaoForm">
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <div class="table-responsive"> 
+          <table id="transacao" class="table">
+            <thead>
+              <tr>
+                <th>endereço de origem</th>
+                <th>endereço de destino</th>
+                <th class="valor">valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of enderecosDisponiveis; let index = index;">
+                <td>
+                  <div class="i-checks">
+                    <input id="endereco_origem_{{ index }}" type="radio" value="{{ item.endereco }}" formControlName="endereco_origem" class="radio-template" (click)="enderecoOrigem=item" />
+                    <label for="endereco_origem_{{ index }}">{{ item.rotulo }}</label>
+                  </div>
+                </td>
+                <td>
+                  <div class="i-checks">
+                    <input id="endereco_destino_{{ index }}" type="checkbox" value="{{ item.endereco }}" formControlName="endereco_destino_{{ index }}" class="checkbox-template" (change)="atualizarTotalInformado()" />
+                    <label for="endereco_destino_{{ index }}">{{ item.rotulo }}</label>
+                  </div>
+                </td>
+                <td>
+                  <input formControlName="valor_{{ index }}" type="text" class="form-control" value="" size="1" maxlength="3" (change)="atualizarTotalInformado()" />
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2" class="text-right pt-4">
+                  <label class="form-control-label text-danger text-bold">informe a taxa ha ser paga ao minerador</label>
+                </td>
+                <td>
+                  <input formControlName="taxa" type="text" class="form-control" maxlength="3" (change)="atualizarTotalInformado()"  />
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="text-right pt-4">
+                  <label class="form-control-label text-danger text-bold">valor total informado ha ser enviado</label>
+                </td>
+                <td class="pt-4">
+                  {{ totalInformado || 0 }}  
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" class="text-right pt-4">
+                  <label class="form-control-label">valor disponível para o endereço selecionado</label>
+                </td>
+                <td class="pt-4">
+                  {{ enderecosBalanco[ enderecoOrigem?.endereco ] || 0 }}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <p><em>Lembre-se de informar corretamente o <span class="text-warning">valor do troco</span> para o endereço <span class="text-warning">{{ enderecoOrigem?.rotulo }}</span>.</em></p>
+  
+  <p [hidden]="!(totalInformado > enderecosBalanco[ enderecoOrigem?.endereco ])" class="text-danger text-bold">O <span class="text-secondary">valor total informado</span> não pode ser maior que o <span class="text-secondary">valor disponível</span>. Por favor, verifique!</p>
+
+</div>
+<div class="modal-footer">
+  <button type="button" data-dismiss="modal" class="btn btn-secondary" (click)="activeModal.dismiss('close')">fechar</button>
+  <button type="button" class="btn btn-primary" (click)="salvarNovaTransacao()" [disabled]="!(enderecoOrigem && totalEnderecosDestino > 0 && enderecosBalanco[ enderecoOrigem?.endereco ] > 0)">salvar</button>
+</div>
