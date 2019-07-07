@@ -44,6 +44,28 @@ export class BlocoService {
   }
 
   /**
+   * Atualiza o hash do bloco informado.
+   */
+  atualizarHashBloco(bloco: BlocoModel){
+    // PARA EFEITOS DE APRESENTACAO ESTAMOS CONSIDERANDO APENAS ALGUNS DADOS - PASSIVEIS DE MOFICACAO PELO USUARIO
+
+    // 1) hash do bloco anterior
+    const hashBlocoAnterior = bloco.hashBlocoAnterior;
+
+    // 2) a lista dos hash das transacoes selecionadas para serem mineradas pelo bloco informado
+    const hashTransacoesBloco = bloco.transacoes.filter(transacao => !transacao.premioMineracao).map(transacao => transacao.hash);
+
+    let dados = {
+      nonce: bloco.nonce,
+      hashBlocoAnterior,
+      hashTransacoesBloco
+    }
+
+    // gera o hash do bloco
+    bloco.hashBloco = crypto.hash256(Buffer.from(JSON.stringify(dados))).toString('hex');
+  }
+
+  /**
    * Minera o bloco informado em busca do nonce que atesta a Prova de Trabalho do esforco empreendido.
    */
   minerarBloco(bloco: BlocoModel, altura: number): boolean {
@@ -79,7 +101,7 @@ export class BlocoService {
         bloco.dificuldade = parseInt(dificuldade, 1000);
         bloco.nonce = nonce;
         bloco.hashBloco = hashBloco;
-console.log(bloco)
+
         // notifica bloco minerado
         return true;
       }

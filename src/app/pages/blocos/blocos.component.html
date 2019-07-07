@@ -1,6 +1,6 @@
 <section class="no-padding-top">
     <div class="container-fluid">
-      <div class="row">
+      <form [formGroup]="blocosForm" class="row">
 
         <div *ngFor="let item of blocosMinerados; let index = index;" class="col-lg-3">
             <div class="block">
@@ -24,7 +24,7 @@
                   </div>
                   <div class="form-group">       
                     <label class="form-control-label d-block text-info">nonce</label>
-                    <input type="text" placeholder="informe um número válido" class="form-control text-warning" value="{{ item.nonce }}" />
+                    <input formControlName="nonce_{{ index }}" control type="text" placeholder="informe um número válido" class="form-control text-warning" value="{{ item.nonce }}" (change)="atualizarHashBloco(item, index)" />
                   </div>
                   <div class="form-group">       
                     <label class="form-control-label d-block">hash do bloco anterior</label>
@@ -36,14 +36,14 @@
                   </div>
 
                   <div class="form-group text-right">       
-                    <input [class]="minerando ? 'btn btn-secondary' : 'btn btn-warning'" control type="submit" value="minerar" class="btn btn-warning" (click)="minerarBloco(item, item.altura);">
+                    <input [class]="minerando ? 'btn btn-secondary' : 'btn btn-warning'" control type="submit" value="minerar" class="btn btn-warning" (click)="minerarBloco(item, index, item.altura);">
                   </div>
           
               </div>
             </div>
           </div>
   
-      </div>
+      </form>
     </div>
   </section>
   
